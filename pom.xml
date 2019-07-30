@@ -1,0 +1,203 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.att</groupId>
+  <artifactId>att</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>att</name>
+  <description>AT&amp;T Software Engineer Coding Challenge</description>
+
+  <developers>
+    <developer>
+      <id>kevin</id>
+      <name>Kevin Crosby</name>
+      <email>Kevin.L.Crosby@gmail.com</email>
+      <roles>
+        <role>Senior Software Engineer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <properties>
+    <project.java.version>1.8</project.java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Common dependencies -->
+    <spark.version>2.3.0</spark.version>
+
+    <!-- Maven plugin versions -->
+    <maven.enforcer.version>3.0.0-M1</maven.enforcer.version>
+    <maven.help.version>3.0.1</maven.help.version>
+    <maven.site.version>3.7.1</maven.site.version>
+    <maven.dependency.version>3.1.0</maven.dependency.version>
+    <maven.clean.version>3.1.0</maven.clean.version>
+    <maven.resources.version>3.1.0</maven.resources.version>
+    <maven.compiler.version>3.7.0</maven.compiler.version>
+    <maven.surefire.version>2.21.0</maven.surefire.version>
+    <maven.jar.version>3.1.0</maven.jar.version>
+    <maven.war.version>3.2.1</maven.war.version>
+    <maven.source.version>3.0.1</maven.source.version>
+    <maven.shade.version>3.1.1</maven.shade.version>
+    <maven.assembly.version>3.1.0</maven.assembly.version>
+    <maven.install.version>2.5.2</maven.install.version>
+    <maven.javadoc.version>3.0.0</maven.javadoc.version>
+    <maven.deploy.version>2.8.2</maven.deploy.version>
+    <maven.release.version>2.5.3</maven.release.version>
+
+    <!-- Version control -->
+    <versions.maven.versions>2.5</versions.maven.versions>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>${maven.help.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${maven.site.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven.dependency.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>${maven.clean.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven.enforcer.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <rules>
+            <requireMavenVersion>
+              <version>[3.5.0,)</version> <!-- i.e. Maven version 3.5.0 or higher -->
+            </requireMavenVersion>
+            <requireJavaVersion>
+              <version>[1.8,)</version> <!-- i.e. Java version 1.8 or higher -->
+            </requireJavaVersion>
+          </rules>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven.resources.version}</version>
+        <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+        <configuration>
+          <!--<heapSize>1g</heapSize>-->
+          <source>${project.java.version}</source>
+          <target>${project.java.version}</target>
+          <useIncrementalCompilation>false</useIncrementalCompilation> <!-- inverted logic -->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.version}</version>
+        <configuration>
+          <forkCount>2C</forkCount>
+          <reuseForks>true</reuseForks>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven.jar.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*.properties</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>${maven.war.version}</version>
+        <configuration>
+          <packagingExcludes>**/*.properties</packagingExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven.source.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${maven.shade.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${maven.assembly.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>${maven.install.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven.deploy.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven.release.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${versions.maven.versions}</version>
+        <configuration>
+          <allowMajorUpdates>false</allowMajorUpdates>
+          <allowSnapshots>false</allowSnapshots>
+          <includes>
+            <include>org.apache.maven.plugins:*</include>
+            <include>org.codehaus.mojo:*</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
