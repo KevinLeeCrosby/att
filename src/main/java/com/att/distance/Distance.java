@@ -32,7 +32,7 @@ public class Distance {
   public static double distance(double latitude1, double longitude1, double elevation1,
                                 double latitude2, double longitude2, double elevation2) {
 
-    final int R = 6371; // radius of the earth in meters
+    final int R = 6371; // radius of the earth in kilometers
 
     double latDistance = toRadians(latitude2 - latitude1);
     double lonDistance = toRadians(longitude2 - longitude1);
